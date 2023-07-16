@@ -1,3 +1,5 @@
+// Adalton de Sena Almeida Filho - 12542435
+// Rafael Zimmer - 12542612
 #ifndef SOCKET_HPP
 #define SOCKET_HPP
 
