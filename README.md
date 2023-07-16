@@ -4,7 +4,7 @@ Projeto feito para a disciplina SSC0142 - Redes de Computadores, ministrada pela
 
 A implementação feita é uma adaptação das especificações dadas pelo [RFC 1459](https://datatracker.ietf.org/doc/html/rfc1459), que define o 
 IRC - *Internet Relay Chat*. Seguindo a especificação do trabalho, os três módulos e o item bônus foram implementados com sucesso. Entretanto, 
-a implementação foi feita apenas para o caso em que clientes e servido estão na mesma máquina. 
+a implementação foi feita apenas para o caso em que clientes e servidor estão na mesma máquina. 
 
 [Link para o vídeo explicativo](https://youtu.be/NLXKtKNuHRI).
 
@@ -26,7 +26,7 @@ Em seguida, execute o comando `./server` para iniciar o servidor. Por padrão, o
  código `server.cpp`.
  
  Em outro terminal, o cliente pode se conectar ao servidor por meio do comando `./client` e em seguida usar o comando 
- `./connect local`. Para novos cliente, basta abrir outros terminais e fazer os mesmos comando, atribuindo apelidos diferentes. 
+ `./connect local`. Para novos cliente, basta abrir outros terminais e fazer os mesmos comandos, atribuindo apelidos diferentes. 
 
 ## Comandos
 - `/connect local` - Conecta o cliente ao servidor local;
