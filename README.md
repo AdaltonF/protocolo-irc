@@ -29,7 +29,7 @@ Em seguida, execute o comando `./server` para iniciar o servidor. Por padrão, o
  `./connect local`. Para novos cliente, basta abrir outros terminais e fazer os mesmos comando, atribuindo apelidos diferentes. 
 
 ## Comandos
-
+- `/connect local` - Conecta o cliente ao servidor local;
 - `/join` nomeCanal - Entra no canal;
 - `/nickname` apelidoDesejado - O cliente passa a ser reconhecido pelo apelido especificado;
 - `/ping` - O servidor retorna "pong"assim que receber a mensagem.  
@@ -39,7 +39,8 @@ Em seguida, execute o comando `./server` para iniciar o servidor. Por padrão, o
 - `/kick` nomeUsuário - Fecha a conexão de um usuário especificado
 - `/mute` nomeUsuário - Faz com que um usuário não possa enviar mensagens neste canal
 - `/unmute` nomeUsuário - Retira o mute de um usuário.
-- `/whois` nomeUsuário - Retorna o endereço IP do usuário apenas para o administrador
+- `/whois` nomeUsuário - Retorna o endereço IP do usuário apenas para o administrador. Na nossa implementação, o endereço IP retornado sempre será o *127.0.0.1* (loopback).
+- `/mode` *+i* ou *-i* - Altera o modo de funcionamento do canal +i (invite-only) ou -i (público)
 
 ## Referência
 
