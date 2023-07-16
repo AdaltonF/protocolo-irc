@@ -26,10 +26,6 @@ Em seguida, execute o comando `./server` para iniciar o servidor. Por padrão, o
  Em outro terminal, o cliente pode se conectar ao servidor por meio do comando `./client` e em seguida usar o comando 
  `./connect local`. Para novos cliente, basta abrir outros terminais e fazer os mesmos comando, atribuindo apelidos diferentes. 
 
-## Casos de Teste
-
-## Resultados Esperados
-
 ## Comandos
 
 - `/join` nomeCanal - Entra no canal;
