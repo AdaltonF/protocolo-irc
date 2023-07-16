@@ -6,6 +6,8 @@ A implementação feita é uma adaptação das especificações dadas pelo [RFC 
 IRC - *Internet Relay Chat*. Seguindo a especificação do trabalho, os três módulos e o item bônus foram implementados com sucesso. Entretanto, 
 a implementação foi feita apenas para o caso em que clientes e servido estão na mesma máquina. 
 
+[Link para o vídeo explicativo feito pelo grupo]().
+
 **Alunos:**
 - Adalton de Sena Almeida Filho - 12542435
 - Rafael Zimmer - 12542612
