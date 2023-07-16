@@ -1,4 +1,4 @@
-# protocolo-irc
+# Implementação do Protocolo IRC
 Projeto feito por alunos da disciplina SSC0142 - Redes de Computadores, ministrada pela professora Kalinka Branco. ICMC-USP
 
 *  Adalton de Sena Almeida Filho - 12542435
