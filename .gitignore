@@ -1,7 +1,7 @@
 client
 server
 .vscode/*
-nick.txt
+apelido.txt
 
 # Prerequisites
 *.d
