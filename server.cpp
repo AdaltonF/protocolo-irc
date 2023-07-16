@@ -541,9 +541,9 @@ void Server::accept() {
 void Server::broadcast() {
     msg_info next_msg_pack;
     bool success = false;
-    string c_name; // Channel name
+    string c_name; // Nome do canal
 
-    cout << "Now broadcasting messages...\n";
+    cout << "Broadcasting mensagens...\n";
 
     while (true) {
         // Previne conflitos
