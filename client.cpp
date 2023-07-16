@@ -44,15 +44,6 @@ void send_message(Socket *s) {
                     running = false;
                 } else if (cmd == "nickname") {
                     nickname = m[2].str();
-                    ofstream nick_file;
-                    try {
-                        nick_file.open("apelido.txt", ios::out);
-                        nick_file << nickname;
-                        nick_file.close();
-                    } catch (exception e) {
-                        cout << e.what() << endl;
-                        running = false;
-                    }
                 }
 
                 success = s->send_message(buffer);
@@ -139,19 +130,10 @@ int main(int argc, const char **argv) {
     bool is_in_table, connected = false, has_initial_nick = false;
     server_dns DNS = get_dns();
     Socket *my_socket;
-
-    ifstream nick_file_in;
-    ofstream nick_file_out;
-    nick_file_in.open("apelido.txt", ios::in);
-
-    nick_file_in >> nickname;
-    has_initial_nick = nickname.size() == 0 ? false : true;
-    nick_file_in.close();
-
+ 
     cout << "Seja bem-vindo(a) ao IRC.\n\n";
 
     if (!has_initial_nick) {
-        nick_file_out.open("apelido.txt", ios::out);
         cout << "Primeiro, crie seu apelido (você poderá alterá-lo mais tarde):\n";
         cin >> nickname;
 
@@ -161,8 +143,6 @@ int main(int argc, const char **argv) {
             cin >> nickname;
         }
 
-        nick_file_out << nickname; // Salva o apelido no arquivo
-        nick_file_out.close();
         getchar();
     }
 
