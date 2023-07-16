@@ -463,7 +463,7 @@ void Server::receive(Socket *client) {
                                 }
                                 this->send_chunk(my_nick + " convidou você a se juntar ao canal " + my_channel,
                                                  this->users[target_user]);
-                                this->send_chunk(target_user + " convidou você a se juntar a este canal!", client);
+                                this->send_chunk(target_user + " foi convidado a se juntar a este canal!", client);
                             } else {
                                 this->send_chunk(target_user + " não existe...", client);
                             }
