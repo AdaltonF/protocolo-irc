@@ -91,13 +91,13 @@ bool Server::is_valid_nickname(string &nick, Socket *client) {
     // Verifica o tamanho do apelido
     if (nick.size() < NICK_MIN || nick.size() > NICK_MAX) {
         // Retorna o erro ao cliente
-        this->send_chunk("Voce precisa fornecer um apelido com 5 ate 50 caracteres.", client);
+        this->send_chunk("Você precisa fornecer um apelido com 5 até 50 caracteres.", client);
         return false;
     }
     // Verifica se o apelido está em uso
     if (this->users.find(nick) != this->users.end()) {
         // Retorna o erro ao cliente
-        this->send_chunk("Apelido ja esta em uso!", client);
+        this->send_chunk("Apelido já está em uso!", client);
         return false;
     }
     return true;
@@ -118,7 +118,7 @@ bool Server::set_nickname(Socket *client, hash_value &client_tup, string &new_ni
 
     // Notifica todos os clientes sobre a alteração
     string my_channel = this->which_channel[client];
-    this->channel_notification(my_channel, "User " + nick(client_tup) + " changed his nickname to " + new_nick + ".");
+    this->channel_notification(my_channel, "Usuário " + nick(client_tup) + " mudou seu apelido para " + new_nick + ".");
 
     // Altera o apelido
     this->users.erase(nick(client_tup));
@@ -159,7 +159,7 @@ string Server::assert_nickname(Socket *client) {
         // Obtém o primeiro comando dado
         cmd = m[1].str();
         if (cmd != "nickname") {
-            this->send_chunk("Por favor, forneca o seu apelido apos o comando /nickname.", client);
+            this->send_chunk("Por favor, forneça o seu apelido após o comando /nickname.", client);
             continue;
         }
         nick = m[2].str();
@@ -245,7 +245,7 @@ void Server::remove_from_channel(Socket *client) {
     else if (this->channels[my_channel].admin == client) {
         Socket *new_adm = this->channels[my_channel].members.begin()->first;
         this->channels[my_channel].admin = new_adm;
-        this->send_chunk("Voce e o novo administrador do canal!", new_adm);
+        this->send_chunk("Você é o novo administrador do canal!", new_adm);
     }
 }
 
@@ -268,14 +268,14 @@ bool Server::change_channel(Socket *client, string new_channel) {
             if (this->channels[new_channel].invited_users.find(nick(myself)) ==
                 this->channels[new_channel].invited_users.end()) {
                 // Usuário não foi convidado
-                this->send_chunk("Voce nao foi convidado ao canal " + new_channel, client);
+                this->send_chunk("Você não foi convidado ao canal " + new_channel, client);
                 mtx.unlock();
                 return false;
             }
         }
     }
 
-    // Deleta o usuario do canal anterior
+    // Deleta o usuário do canal anterior
     this->remove_from_channel(client);
 
     // Se o novo canal não existe
@@ -316,7 +316,7 @@ Server::Server(int port) : listener("any", port) {
     // Abre o servido para no máximo MAX_CONN conexões
     success = this->listener.listening(MAX_CONN);
     if (!success) {
-        throw("Porta ja esta em uso.");
+        throw("Porta já está em uso.");
     }
     // Cria o canal #general
     Channel gen;
@@ -380,7 +380,7 @@ void Server::receive(Socket *client) {
                 // Apaga o apelido do cliente do servidor
                 this->users.erase(my_nick);
                 set_alive(*myself, false);
-                this->send_chunk("Voce saiu do servidor...", client);
+                this->send_chunk("Você saiu do servidor...", client);
                 cout << "Cliente " << my_nick << " saiu" << endl; // Log
             } else if (cmd == "ping") {
                 // Envia "pong" ao cliente
@@ -405,13 +405,13 @@ void Server::receive(Socket *client) {
                 }
                 // Tenta se juntar ao mesmo canal
                 else if (!new_channel.compare(my_channel)) {
-                    this->send_chunk("Voce ja esta neste canal.", client);
+                    this->send_chunk("Você já está neste canal.", client);
                 }
                 // Sucesso
                 else {
                     if (this->change_channel(client, new_channel)) {
                         // Operação bem-sucedida
-                        this->send_chunk("Voce mudou do canal " + my_channel + " para o canal " + new_channel, client);
+                        this->send_chunk("Você mudou do canal " + my_channel + " para o canal " + new_channel, client);
                         channel_notification(my_channel, my_nick + " saiu do canal.");
                         channel_notification(new_channel, my_nick + " entrou no canal!");
                     }
@@ -423,17 +423,17 @@ void Server::receive(Socket *client) {
                     mode_args = m[2].str();
                     if (mode_args == "+i") {
                         this->channels[my_channel].isInviteOnly = true;
-                        this->channel_notification(my_channel, "Agora, o canal e invite-only!");
+                        this->channel_notification(my_channel, "Agora, o canal é invite-only!");
                     } else if (mode_args == "-i") {
                         this->channels[my_channel].isInviteOnly = false;
-                        this->channel_notification(my_channel, "Agora, o canal e publico!");
+                        this->channel_notification(my_channel, "Agora, o canal é publico!");
                     } else {
                         this->send_chunk("Forma de uso: /mode (+|-)i", client);
                         if (mode_args[0] != '+' && mode_args[0] != '-') {
-                            this->send_chunk("Voce pode apenas adicionar (+) ou deletar (-) um modo de um canal.", client);
+                            this->send_chunk("Você pode apenas adicionar (+) ou deletar (-) um modo de um canal.", client);
                         }
                         if (mode_args[1] != 'i') {
-                            this->send_chunk("O unico modo que voce pode utilizar nesse canal e 'i' (invite-only)",
+                            this->send_chunk("O único modo que você pode utilizar nesse canal é 'i' (invite-only)",
                                              client);
                         }
                     }
@@ -459,24 +459,24 @@ void Server::receive(Socket *client) {
                                 if (this->channels[my_channel].isInviteOnly) {
                                     this->channels[my_channel].invited_users.insert(target_user);
                                 }
-                                this->send_chunk(my_nick + " convidou voce a se juntar ao canal " + my_channel,
+                                this->send_chunk(my_nick + " convidou você a se juntar ao canal " + my_channel,
                                                  this->users[target_user]);
-                                this->send_chunk(target_user + " convidou voce a se juntar a este canal!", client);
+                                this->send_chunk(target_user + " convidou você a se juntar a este canal!", client);
                             } else {
-                                this->send_chunk(target_user + " nao existe...", client);
+                                this->send_chunk(target_user + " não existe...", client);
                             }
                         } else {
-                            this->send_chunk("O usuario solicitado nao esta neste canal!", client);
+                            this->send_chunk("O usuário solicitado não está neste canal!", client);
                         }
                     } else {
                         hash_value &target_tup = this->channels[my_channel].members[target];
                         // Verifica se o alvo é o próprio usuário
                         if (client == target) {
-                            this->send_chunk("Voce nao pode ser alvo do comando de adm.", client);
+                            this->send_chunk("Você não pode ser alvo do comando de adm.", client);
                         } else {
                             if (cmd == "kick") {
                                 this->change_channel(target, "#general");
-                                this->send_chunk(my_nick + " expulsou voce do canal.", target);
+                                this->send_chunk(my_nick + " expulsou você do canal.", target);
                                 this->channel_notification(my_channel,
                                                            nick(target_tup) + " foi expulso do canal.");
                             } else if (cmd == "mute") {
@@ -484,20 +484,20 @@ void Server::receive(Socket *client) {
                                 this->channel_notification(my_channel, nick(target_tup) + " foi silenciado.");
                             } else if (cmd == "unmute") {
                                 muted(target_tup) = false;
-                                this->channel_notification(my_channel, nick(target_tup) + " nao esta mais silenciado.");
+                                this->channel_notification(my_channel, nick(target_tup) + " não está mais silenciado.");
                             } else if (cmd == "whois") {
                                 string target_ip = target->get_IP_address();
-                                this->send_chunk("Usuario " + nick(target_tup) + " tem o endereco IP " + target_ip + ".",
+                                this->send_chunk("Usuário " + nick(target_tup) + " tem o endereco IP " + target_ip + ".",
                                                  client);
                             } else if (cmd == "invite") {
-                                this->send_chunk(target_user + " ja esta no canal!", client);
+                                this->send_chunk(target_user + " ja está no canal!", client);
                             }
                         }
                     }
                 }
             } else if (cmd == "invite") {
-                // Voce nao pode utilizar o comando 'invite', caso nao seja adm
-                this->send_chunk("Voce nao pode utilizar o comando 'invite', caso nao seja adm do canal", client);
+                // Você não pode utilizar o comando 'invite', caso não seja adm
+                this->send_chunk("Você não pode utilizar o comando 'invite', caso não seja adm do canal", client);
             }
         } else {
             // Mensagem comum
@@ -514,7 +514,7 @@ void Server::receive(Socket *client) {
     }
 
     cout << "Conexao fechada com " << my_nick << endl;
-    this->channel_notification(my_channel, "Usuario " + my_nick + " foi desconectado do servidor...");
+    this->channel_notification(my_channel, "Usuário " + my_nick + " foi desconectado do servidor...");
 }
 
 /*
@@ -524,7 +524,7 @@ void Server::accept() {
     Socket *client;
     thread new_thread;
 
-    cout << "Aceitando novas conexoes...\n";
+    cout << "Aceitando novas conexões...\n";
 
     while (true) {
         // Aguarda ate receber novas conexoes. Então, cria um novo socket para a comunicação com esse cliente

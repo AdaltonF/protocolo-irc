@@ -40,7 +40,7 @@ bool Socket::set_address(std::string ip, uint16_t port) {
         if (ip == "localhost")
             ip = "127.0.0.1";
         int status = inet_aton(ip.c_str(), &(this->address.sin_addr));
-        check_error(status, 0, "Conversion of IP failed");
+        check_error(status, 0, "Conversão de IP falhou");
         return status == 0 ? false : true;
     }
     return true;
@@ -55,7 +55,7 @@ Socket::Socket(std::string ip, uint16_t port) {
     this->my_fd = socket(AF_INET, SOCK_STREAM, 0); // Using TCP Protocol
     this->address.sin_family = AF_INET;
     if (!this->set_address(ip, port)) {
-        throw("Could not create socket (invalid IP).");
+        throw("Não foi possível criar um socket (IP inválido).");
     }
     int optval = 1;
     setsockopt(this->my_fd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval));
@@ -114,7 +114,7 @@ std::string Socket::get_IP_address() {
  */
 bool Socket::connect_to_address() {
     int status = connect(this->my_fd, (struct sockaddr *)&(this->address), sizeof(this->address));
-    check_error(status, -1, "Connection failed");
+    check_error(status, -1, "Conexão falhou");
     return status == -1 ? false : true;
 }
 
@@ -130,7 +130,7 @@ bool Socket::send_message(std::string buffer) {
     const char *msg = buffer.c_str();
 
     int status = send(this->my_fd, msg, strlen(msg) + 1, 0);
-    check_error(status, -1, "Message delivery failed");
+    check_error(status, -1, "A entrega a mensagem falhou.");
     if (status == -1)
         return false; // Error
     return true;
@@ -148,7 +148,7 @@ int Socket::receive_message(std::string &buffer) {
     const char *c_msg = new char[MSG_SIZE + NICK_SIZE + 1]; // +1 because of \0
 
     int status = recv(this->my_fd, (void *)c_msg, (MSG_SIZE + 1) * sizeof(char), 0);
-    check_error(status, -1, "Failed to receive message");
+    check_error(status, -1, "Falha ao receber a mensagem.");
 
     if (status != -1) {
         if ((int)buffer.size() != status)

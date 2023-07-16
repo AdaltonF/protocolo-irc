@@ -120,7 +120,7 @@ void list_servers(server_dns &DNS) {
 bool connect_to(server_dns &DNS, string &server_name, string &ip, uint16_t &port) {
     if ((int)server_name.size() < 5 || (int)server_name.size() > 50)
         return false;
-    // Verifica se o servido está cadastrado no nosso DNS
+    // Verifica se o servidor está cadastrado no nosso DNS
     if (DNS.count(server_name)) {
         server_data value = DNS[server_name];
         ip = value.first;
@@ -152,11 +152,11 @@ int main(int argc, const char **argv) {
 
     if (!has_initial_nick) {
         nick_file_out.open("apelido.txt", ios::out);
-        cout << "Primeiro, crie seu apelido (voce podera altera-lo mais tarde):\n";
+        cout << "Primeiro, crie seu apelido (você poderá alterá-lo mais tarde):\n";
         cin >> nickname;
 
         while (nickname.size() < NICK_MIN || nickname.size() > NICK_MAX) {
-            cout << "\nVoce precisa fornecer um apelido com no minimo " << NICK_MIN << " e no maximo " << NICK_MAX
+            cout << "\nVocê precisa fornecer um apelido com no mínimo " << NICK_MIN << " e no máximo " << NICK_MAX
                  << " caracteres:\n";
             cin >> nickname;
         }
@@ -168,7 +168,7 @@ int main(int argc, const char **argv) {
 
     while (running) {
         cout << "\nConecte-se a um dos nossos servidores utilizando o comando /connect.\n"
-             << "Voce pode usar o comando /list para listar todos os servidores disponiveis.\n\n";
+             << "Você pode usar o comando /list para listar todos os servidores disponíveis.\n\n";
         getline(cin, cmd);
         // Filtra os comandos
         regex_search(cmd, m, r);
@@ -179,14 +179,14 @@ int main(int argc, const char **argv) {
             // Obtem o endereço IP e a porta, por meio da tabela DNS
             is_in_table = connect_to(DNS, server_name, server_ip, server_port);
             if (!is_in_table) {
-                cout << "Nao foi possivel encontra o servidor solicitado na nossa tabela DNS.\n";
+                cout << "Não foi possível encontrar o servidor solicitado na nossa tabela DNS.\n";
                 continue;
             }
         } else if (cmd == "list") {
             list_servers(DNS);
             continue;
         } else {
-            cout << "Por favor, forneca um comando validor para iniciar o IRC.\n";
+            cout << "Por favor, forneça um comando válido para iniciar o IRC.\n";
             continue;
         }
         // Cria socket
@@ -206,7 +206,7 @@ int main(int argc, const char **argv) {
 
         } else {
             while (quit != 's' && quit != 'n') {
-                cout << "Voce deseja sair? (s/n)" << endl;
+                cout << "Você deseja sair? (s/n)" << endl;
                 cin >> quit;
             }
             if (quit == 's') {
@@ -218,7 +218,7 @@ int main(int argc, const char **argv) {
         }
 
         if (!running) {
-            cout << "Encerrando a conexao.\n\n\n" << endl;
+            cout << "Encerrando a conexão.\n\n\n" << endl;
         }
 
         signal(SIGINT, SIG_DFL);
