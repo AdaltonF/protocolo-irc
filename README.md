@@ -6,15 +6,15 @@ Projeto feito para a disciplina SSC0142 - Redes de Computadores, ministrada pela
 - Adalton de Sena Almeida Filho - 12542435
 - Rafael Zimmer - 12542612
 
-# Requisitos
+## Requisitos
 
-# Instruções
+## Instruções
 
-# Casos de Teste
+## Casos de Teste
 
-# Resultados Esperados
+## Resultados Esperados
 
-# Comandos
+## Comandos
 
 - `/join` nomeCanal - Entra no canal;
 - `/nickname` apelidoDesejado - O cliente passa a ser reconhecido pelo apelido especificado;
@@ -27,7 +27,7 @@ Projeto feito para a disciplina SSC0142 - Redes de Computadores, ministrada pela
 - `/unmute` nomeUsurio - Retira o mute de um usuário.
 - `/whois` nomeUsurio - Retorna o endereço IP do usuário apenas para o administrador
 
-# Referência
+## Referência
 
 O código foi livremente inspirado na implementação presente neste [repositório](https://github.com/vitor-san/irc-redes). Agradecemos 
 aos autores pelo bom trabalho desenvolvido.
