@@ -503,8 +503,8 @@ void Server::receive(Socket *client) {
             }
         } else {
             // Mensagem comum
-            cout << buffer << endl;
-            msg_pack.content = this->prepare_msg(strcat(buffer, my_nick), client);
+            cout << my_channel + "-" + my_nick + ": " + buffer << endl;
+            msg_pack.content = this->prepare_msg(buffer, client);
             msg_pack.sender = client;
             this->send_to_queue(msg_pack);
             // Apaga o buffer
