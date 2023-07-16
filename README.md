@@ -36,10 +36,10 @@ Em seguida, execute o comando `./server` para iniciar o servidor. Por padrão, o
 
 **Comandos apenas para administradores de canais:**
   
-- `/kick` nomeUsurio - Fecha a conexão de um usuário especificado
-- `/mute` nomeUsurio - Faz com que um usuário não possa enviar mensagens neste canal
-- `/unmute` nomeUsurio - Retira o mute de um usuário.
-- `/whois` nomeUsurio - Retorna o endereço IP do usuário apenas para o administrador
+- `/kick` nomeUsuário - Fecha a conexão de um usuário especificado
+- `/mute` nomeUsuário - Faz com que um usuário não possa enviar mensagens neste canal
+- `/unmute` nomeUsuário - Retira o mute de um usuário.
+- `/whois` nomeUsuário - Retorna o endereço IP do usuário apenas para o administrador
 
 ## Referência
 
